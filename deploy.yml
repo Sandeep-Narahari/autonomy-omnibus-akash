@@ -11,16 +11,16 @@ services:
       - MONIKER=my-moniker-1
       - CHAIN_ID=autonomy
       - P2P_PERSISTENT_PEERS=390bbb89b868236e0c1b05eec29c92f7b96d14b8@v2.rpc.wouo.autonomy.network:26656,93ee9a647c64f77912dd7e3a7c61c78c5346787e@52.255.154.207:26656,1bbc7b1fa7ed19476785a899025c250990ae303a@20.85.215.78:26656,eccc6bbdf408757e549639e5a7c89f002012dd2b@20.124.119.15:26656
-      - GENESIS_URL=https://drive.google.com/uc?export=download&id=1APXcTwlldae5cumDLygiu9wlozT6x8a-
+      - GENESIS_URL=https://raw.githubusercontent.com/Sandeep-Narahari/autonomy-omnibus-akash/main/genesis.json
       - S3_KEY=XXXXXXXXXX
       - S3_SECRET=XXXXXXXXXX
       - S3_HOST=https://s3.filebase.com
-      - KEY_PATH=bucker_name/nodes/n2
+      - KEY_PATH=bucket_name/nodes/n2
       - STATESYNC_ENABLE=true
       - STATESYNC_RPC_SERVERS=https://v2.rpc.wouo.autonomy.network:443,https://v2.rpc.wouo.autonomy.network:443
       - STATESYNC_TRUST_PERIOD=168h0m0s
-      - STATESYNC_TRUST_HEIGHT=935051
-      - STATESYNC_TRUST_HASH=00C639538FC42FBF7AF8E97E8DCC7B87AAF3CB90382ACBD4E479E61BA83FCF6B
+      - STATESYNC_TRUST_HEIGHT=XXXXXXXXXXX
+      - STATESYNC_TRUST_HASH=XXXXXXXXXXXXX
 
     expose:
       - port: 26657
