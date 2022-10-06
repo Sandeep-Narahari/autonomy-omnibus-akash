@@ -1,0 +1,63 @@
+---
+version: "2.0"
+
+services:
+  node:
+    image: docker.io/sandeepnarahari/autonomy-omnibus-akash:1.1
+    env:
+      - MONIKER=my-moniker-1
+      - CHAIN_ID=autonomy
+      - P2P_PERSISTENT_PEERS=390bbb89b868236e0c1b05eec29c92f7b96d14b8@v2.rpc.wouo.autonomy.network:26656,93ee9a647c64f77912dd7e3a7c61c78c5346787e@52.255.154.207:26656,1bbc7b1fa7ed19476785a899025c250990ae303a@20.85.215.78:26656,eccc6bbdf408757e549639e5a7c89f002012dd2b@20.124.119.15:26656
+      - GENESIS_URL=https://raw.githubusercontent.com/Sandeep-Narahari/autonomy-omnibus-akash/main/genesis.json
+      - S3_HOST=https://s3.filebase.com
+      - STATESYNC_ENABLE=true
+      - STATESYNC_RPC_SERVERS=https://v2.rpc.wouo.autonomy.network:443,https://v2.rpc.wouo.autonomy.network:443
+      - STATESYNC_TRUST_PERIOD=168h0m0s
+      - STATESYNC_TRUST_HEIGHT=1050301
+      - STATESYNC_TRUST_HASH=BC1EC7F56F353854E21DDD737687EB461D559C7029481A0589046656769FA43D
+
+    expose:
+      - port: 26657
+        as: 80
+        to:
+          - global: true
+      - port: 26656
+        to:
+          - global: true
+    params:
+      storage:
+        data:
+          mount: /root/.autonomy
+
+profiles:
+  compute:
+    node:
+      resources:
+        cpu:
+          units: 4
+        memory:
+          size: 8Gi
+        storage:
+          - size: 100Gi
+          - name: data
+            size: 400Gi
+            attributes:
+              persistent: true
+              class: beta3
+  placement:
+    dcloud:
+      attributes:
+        host: akash
+      signedBy:
+        anyOf:
+          - akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63
+      pricing:
+        node:
+          denom: uakt
+          amount: 1000
+
+deployment:
+  node:
+    dcloud:
+      profile: node
+      count: 1
